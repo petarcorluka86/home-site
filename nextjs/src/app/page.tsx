@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 
 export default function Home() {
-  const [showWelcomeDialog, setShowWelcomeDialog] = useState(true);
+  const [showWelcomeDialog, setShowWelcomeDialog] = useState(false);
   const [showTasksDialog, setShowTasksDialog] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [time, setTime] = useState<string>("");
@@ -35,7 +35,7 @@ export default function Home() {
           className={styles.startButton}
           onClick={() => setShowWelcomeDialog(true)}
         >
-          <span>start</span>
+          <span>START</span>
         </div>
         <div className={styles.taskbarTime}>{mounted ? time : ""}</div>
       </div>
@@ -67,14 +67,11 @@ export default function Home() {
             <div className={styles.dialogContent}>
               <div className={styles.dialogIcon}>ℹ️</div>
               <div className={styles.dialogText}>
-                <h3>DevOps Playground</h3>
+                <h3>Hi there!</h3>
                 <p>
                   This is a DevOps playground used for educational purposes.
                 </p>
-                <p>
-                  Explore the completed tasks and learn about modern DevOps
-                  practices.
-                </p>
+                <p>There is no real use of this site.</p>
               </div>
             </div>
             <div className={styles.dialogButtons}>

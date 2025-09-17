@@ -2,7 +2,11 @@
 .desktop {
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(135deg, #0a4c8c 0%, #1e5f99 50%, #2a6bb0 100%);
+  /* Retro image with gradient overlay for readability */
+  background: url("/wallpaper.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   position: relative;
   overflow: hidden;
   font-family: "Tahoma", "Arial", sans-serif;

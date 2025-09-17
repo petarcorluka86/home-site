@@ -111,6 +111,12 @@
   text-align: center;
 }
 
+.helpIcon {
+  font-size: 32px;
+  margin-bottom: 4px;
+  text-align: center;
+}
+
 /* Dialog Overlay */
 .dialogOverlay {
   position: fixed;

@@ -49,6 +49,13 @@ export default function Home() {
           <div className={styles.notepadIcon}>📝</div>
           <span>Tasks.txt</span>
         </div>
+        <div
+          className={styles.desktopIcon}
+          onClick={() => setShowWelcomeDialog(true)}
+        >
+          <div className={styles.helpIcon}>❓</div>
+          <span>Help</span>
+        </div>
       </div>
 
       {/* Welcome Dialog */}

@@ -7,6 +7,8 @@ import Dialog from "@/components/Dialog/Dialog";
 import StartMenu from "@/components/StartMenu/StartMenu";
 import DesktopIcon from "@/components/DesktopIcon/DesktopIcon";
 import Notepad from "@/components/Notepad/Notepad";
+import Toolbar from "@/components/Toolbar/Toolbar";
+import Shutdown from "@/components/Shutdown/Shutdown";
 
 export default function Home() {
   const [showWelcomeDialog, setShowWelcomeDialog] = useState(false);
@@ -27,7 +29,6 @@ export default function Home() {
     return () => clearInterval(id);
   }, []);
 
-  // Close Start menu when clicking outside (using refs)
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (!showStartMenu) return;
@@ -54,41 +55,18 @@ export default function Home() {
     "Setup auto deploy with GitHub actions",
   ];
 
-  // If shutdown, show shutdown screen
   if (isShutdown) {
-    return (
-      <div
-        className={styles.shutdownScreen}
-        onClick={() => setIsShutdown(false)}
-      >
-        <div className={styles.shutdownMessage}>
-          <div className={styles.shutdownIcon}>💻</div>
-          <div className={styles.shutdownText}>
-            Your computer is now safe to turn off.
-          </div>
-          <div className={styles.shutdownSubtext}>
-            Click anywhere to turn on
-          </div>
-        </div>
-      </div>
-    );
+    return <Shutdown onPowerOn={() => setIsShutdown(false)} />;
   }
 
   return (
     <div className={styles.desktop}>
-      {/* Windows XP Desktop Background */}
-      <div className={styles.taskbar}>
-        <div
-          className={styles.startButton}
-          onClick={() => setShowStartMenu(!showStartMenu)}
-          ref={startButtonRef}
-        >
-          <span>START</span>
-        </div>
-        <div className={styles.taskbarTime}>{mounted ? time : ""}</div>
-      </div>
+      <Toolbar
+        time={mounted ? time : ""}
+        onToggleStartMenu={() => setShowStartMenu(!showStartMenu)}
+        ref={startButtonRef}
+      />
 
-      {/* Windows 95 Start Menu */}
       {showStartMenu && (
         <div ref={startMenuRef}>
           <StartMenu
@@ -108,7 +86,6 @@ export default function Home() {
         </div>
       )}
 
-      {/* Desktop Icons */}
       <div className={styles.desktopIcons}>
         <DesktopIcon label="Tasks.txt" onOpen={() => setShowTasksDialog(true)}>
           <Image src="/notepad.png" alt="Tasks" width={32} height={32} />
@@ -118,7 +95,6 @@ export default function Home() {
         </DesktopIcon>
       </div>
 
-      {/* Welcome Dialog */}
       {showWelcomeDialog && (
         <Dialog
           title="Welcome"
@@ -131,7 +107,6 @@ export default function Home() {
         </Dialog>
       )}
 
-      {/* Tasks Dialog - Windows 95 Notepad Style */}
       {showTasksDialog && (
         <Notepad
           title="Tasks.txt - Notepad"

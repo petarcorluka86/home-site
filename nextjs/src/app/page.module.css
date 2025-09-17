@@ -13,52 +13,7 @@
   color: #000;
 }
 
-/* Taskbar */
-.taskbar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 30px;
-  background: #c0c0c0; /* Windows 95 gray */
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 2px 4px;
-  z-index: 1000;
-  /* Beveled top edge: light on top, dark just below */
-  border-top: 1px solid #ffffff;
-  box-shadow: 0 -1px 0 #808080;
-}
-
-.startButton {
-  background: #c0c0c0;
-  border: 2px outset #ffffff;
-  padding: 2px 10px;
-  cursor: pointer;
-  border-radius: 0;
-  font-weight: bold;
-  color: #000;
-}
-
-.startButton:hover {
-  filter: brightness(1.03);
-}
-
-.startButton:active {
-  border: 2px inset #ffffff;
-}
-
-.taskbarTime {
-  color: #000;
-  font-weight: normal;
-  padding: 2px 6px;
-  background: #c0c0c0;
-  border: 2px inset #ffffff; /* recessed look */
-  border-radius: 0;
-  min-width: 64px;
-  text-align: center;
-}
+/* Taskbar moved to components/Toolbar */
 
 /* Desktop Icons container */
 .desktopIcons {
@@ -72,43 +27,7 @@
 
 /* Start menu moved to components/StartMenu */
 
-/* Shutdown Screen */
-.shutdownScreen {
-  width: 100vw;
-  height: 100vh;
-  background: #000000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-}
-
-.shutdownMessage {
-  text-align: center;
-  color: #ffffff;
-  font-family: "Tahoma", "Arial", sans-serif;
-}
-
-.shutdownIcon {
-  font-size: 64px;
-  margin-bottom: 20px;
-}
-
-.shutdownText {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.shutdownSubtext {
-  font-size: 14px;
-  color: #cccccc;
-  font-style: italic;
-}
+/* Shutdown screen moved to components/Shutdown */
 
 /* Dialog moved to components/Dialog */
 
@@ -120,39 +39,10 @@
     font-size: 12px;
   }
 
-  .taskbar {
-    height: 40px;
-    padding: 0 8px;
-  }
-
-  .startButton {
-    padding: 4px 12px;
-    font-size: 12px;
-  }
-
-  .taskbarTime {
-    font-size: 12px;
-    padding: 4px 8px;
-  }
-
   .desktopIcons {
     top: 30px;
     left: 30px;
     gap: 30px;
-  }
-
-  .shutdownIcon {
-    font-size: 48px;
-    margin-bottom: 16px;
-  }
-
-  .shutdownText {
-    font-size: 16px;
-    margin-bottom: 8px;
-  }
-
-  .shutdownSubtext {
-    font-size: 12px;
   }
 }
 
@@ -161,19 +51,5 @@
     top: 20px;
     left: 20px;
     gap: 25px;
-  }
-
-  .shutdownIcon {
-    font-size: 40px;
-    margin-bottom: 12px;
-  }
-
-  .shutdownText {
-    font-size: 14px;
-    margin-bottom: 6px;
-  }
-
-  .shutdownSubtext {
-    font-size: 11px;
   }
 }

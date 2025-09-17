@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "DevOps Playground",
+  title: "Windows 95",
   description: "DevOps Playground for educational purposes.",
 };
 

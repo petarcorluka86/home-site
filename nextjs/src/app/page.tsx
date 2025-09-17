@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import styles from "./page.module.css";
+import Image from "next/image";
 
 export default function Home() {
   const [showWelcomeDialog, setShowWelcomeDialog] = useState(false);
@@ -19,6 +20,29 @@ export default function Home() {
     }, 1000);
     return () => clearInterval(id);
   }, []);
+
+  // Close Start menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (showStartMenu) {
+        const target = event.target as Element;
+        if (
+          !target.closest(`.${styles.startMenu}`) &&
+          !target.closest(`.${styles.startButton}`)
+        ) {
+          setShowStartMenu(false);
+        }
+      }
+    };
+
+    if (showStartMenu) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showStartMenu]);
 
   const tasks = [
     "Buy server",
@@ -75,7 +99,7 @@ export default function Home() {
               setShowStartMenu(false);
             }}
           >
-            <span className={styles.menuIcon}>📝</span>
+            <Image src="/notepad.png" alt="Tasks" width={16} height={16} />
             <span>Tasks.txt</span>
           </div>
           <div
@@ -85,7 +109,7 @@ export default function Home() {
               setShowStartMenu(false);
             }}
           >
-            <span className={styles.menuIcon}>❓</span>
+            <Image src="/help.png" alt="Help" width={16} height={16} />
             <span>Help</span>
           </div>
           <div className={styles.startMenuSeparator}></div>
@@ -96,8 +120,8 @@ export default function Home() {
               setIsShutdown(true);
             }}
           >
-            <span className={styles.menuIcon}>🚪</span>
-            <span>Shut Down...</span>
+            <Image src="/shutdown.png" alt="Shutdown" width={16} height={16} />
+            <span>Shut Down</span>
           </div>
         </div>
       )}
@@ -108,14 +132,14 @@ export default function Home() {
           className={styles.desktopIcon}
           onClick={() => setShowTasksDialog(true)}
         >
-          <div className={styles.notepadIcon}>📝</div>
+          <Image src="/notepad.png" alt="Tasks" width={32} height={32} />
           <span>Tasks.txt</span>
         </div>
         <div
           className={styles.desktopIcon}
           onClick={() => setShowWelcomeDialog(true)}
         >
-          <div className={styles.helpIcon}>❓</div>
+          <Image src="/help.png" alt="Help" width={32} height={32} />
           <span>Help</span>
         </div>
       </div>
@@ -184,11 +208,6 @@ export default function Home() {
                     • {task}
                   </div>
                 ))}
-                <br />
-                <br />
-                All tasks have been successfully completed!
-                <br />
-                This playground demonstrates modern DevOps practices.
               </div>
             </div>
           </div>

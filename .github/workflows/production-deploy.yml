@@ -23,3 +23,8 @@ jobs:
           script: |
             cd /var/www/html/home-site
             git pull origin master
+            cd nextjs
+            docker build -t nextjs-image .
+            docker stop nextjs-container || true
+            docker rm nextjs-container || true
+            docker run -d --name nextjs-container -p 3000:3000 nextjs-image

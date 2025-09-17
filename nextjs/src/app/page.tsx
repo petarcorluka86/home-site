@@ -47,12 +47,12 @@ export default function Home() {
   }, [showStartMenu]);
 
   const tasks = [
-    "Buy server",
-    "Setup domain",
-    "Setup SSL",
-    "Setup nginx",
-    "Setup Next.js app with Docker",
-    "Setup auto deploy with GitHub actions",
+    "✅ Buy server on Hetzner",
+    "✅ Setup domain (Namecheap)",
+    "✅ Setup SSL",
+    "✅ Setup Next.js app with Docker",
+    "✅ Setup nginx reverse proxy",
+    "✅ Setup auto deploy with GitHub actions",
   ];
 
   if (isShutdown) {

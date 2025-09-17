@@ -46,8 +46,8 @@ export default function Home() {
           className={styles.desktopIcon}
           onClick={() => setShowTasksDialog(true)}
         >
-          <div className={styles.iconImage}>📄</div>
-          <span>Tasks</span>
+          <div className={styles.notepadIcon}>📝</div>
+          <span>Tasks.txt</span>
         </div>
       </div>
 
@@ -86,12 +86,12 @@ export default function Home() {
         </div>
       )}
 
-      {/* Tasks Dialog */}
+      {/* Tasks Dialog - Windows 95 Notepad Style */}
       {showTasksDialog && (
         <div className={styles.dialogOverlay}>
-          <div className={styles.dialog}>
-            <div className={styles.dialogTitleBar}>
-              <span className={styles.dialogTitle}>Completed Tasks</span>
+          <div className={styles.notepadWindow}>
+            <div className={styles.notepadTitleBar}>
+              <span className={styles.notepadTitle}>Tasks.txt - Notepad</span>
               <button
                 className={styles.closeButton}
                 onClick={() => setShowTasksDialog(false)}
@@ -99,26 +99,28 @@ export default function Home() {
                 ×
               </button>
             </div>
-            <div className={styles.dialogContent}>
-              <div className={styles.dialogIcon}>📋</div>
-              <div className={styles.dialogText}>
-                <h3>DevOps Tasks Completed</h3>
-                <ul className={styles.tasksList}>
-                  {tasks.map((task, index) => (
-                    <li key={index} className={styles.taskItem}>
-                      ✅ {task}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            <div className={styles.notepadMenuBar}>
+              <span className={styles.menuItem}>File</span>
+              <span className={styles.menuItem}>Edit</span>
+              <span className={styles.menuItem}>Search</span>
+              <span className={styles.menuItem}>Help</span>
             </div>
-            <div className={styles.dialogButtons}>
-              <button
-                className={styles.okButton}
-                onClick={() => setShowTasksDialog(false)}
-              >
-                Close
-              </button>
+            <div className={styles.notepadContent}>
+              <div className={styles.notepadText}>
+                DevOps Tasks Completed:
+                <br />
+                <br />
+                {tasks.map((task, index) => (
+                  <div key={index} className={styles.notepadTask}>
+                    • {task}
+                  </div>
+                ))}
+                <br />
+                <br />
+                All tasks have been successfully completed!
+                <br />
+                This playground demonstrates modern DevOps practices.
+              </div>
             </div>
           </div>
         </div>

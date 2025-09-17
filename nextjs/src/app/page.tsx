@@ -6,6 +6,8 @@ import styles from "./page.module.css";
 export default function Home() {
   const [showWelcomeDialog, setShowWelcomeDialog] = useState(false);
   const [showTasksDialog, setShowTasksDialog] = useState(false);
+  const [showStartMenu, setShowStartMenu] = useState(false);
+  const [isShutdown, setIsShutdown] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [time, setTime] = useState<string>("");
 
@@ -27,18 +29,78 @@ export default function Home() {
     "Setup auto deploy with GitHub actions",
   ];
 
+  // If shutdown, show shutdown screen
+  if (isShutdown) {
+    return (
+      <div
+        className={styles.shutdownScreen}
+        onClick={() => setIsShutdown(false)}
+      >
+        <div className={styles.shutdownMessage}>
+          <div className={styles.shutdownIcon}>💻</div>
+          <div className={styles.shutdownText}>
+            Your computer is now safe to turn off.
+          </div>
+          <div className={styles.shutdownSubtext}>
+            Click anywhere to turn on
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.desktop}>
       {/* Windows XP Desktop Background */}
       <div className={styles.taskbar}>
         <div
           className={styles.startButton}
-          onClick={() => setShowWelcomeDialog(true)}
+          onClick={() => setShowStartMenu(!showStartMenu)}
         >
           <span>START</span>
         </div>
         <div className={styles.taskbarTime}>{mounted ? time : ""}</div>
       </div>
+
+      {/* Windows 95 Start Menu */}
+      {showStartMenu && (
+        <div className={styles.startMenu}>
+          <div className={styles.startMenuHeader}>
+            <span>Windows 95</span>
+          </div>
+          <div
+            className={styles.startMenuItem}
+            onClick={() => {
+              setShowTasksDialog(true);
+              setShowStartMenu(false);
+            }}
+          >
+            <span className={styles.menuIcon}>📝</span>
+            <span>Tasks.txt</span>
+          </div>
+          <div
+            className={styles.startMenuItem}
+            onClick={() => {
+              setShowWelcomeDialog(true);
+              setShowStartMenu(false);
+            }}
+          >
+            <span className={styles.menuIcon}>❓</span>
+            <span>Help</span>
+          </div>
+          <div className={styles.startMenuSeparator}></div>
+          <div
+            className={styles.startMenuItem}
+            onClick={() => {
+              setShowStartMenu(false);
+              setIsShutdown(true);
+            }}
+          >
+            <span className={styles.menuIcon}>🚪</span>
+            <span>Shut Down...</span>
+          </div>
+        </div>
+      )}
 
       {/* Desktop Icons */}
       <div className={styles.desktopIcons}>

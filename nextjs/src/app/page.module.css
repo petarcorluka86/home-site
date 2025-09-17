@@ -117,6 +117,94 @@
   text-align: center;
 }
 
+/* Windows 95 Start Menu */
+.startMenu {
+  position: fixed;
+  bottom: 30px;
+  left: 4px;
+  background: #c0c0c0;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-bottom: 2px solid #808080;
+  border-right: 2px solid #808080;
+  min-width: 200px;
+  z-index: 1500;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.startMenuHeader {
+  background: #000080;
+  color: #ffffff;
+  padding: 4px 8px;
+  font-weight: bold;
+  font-size: 11px;
+}
+
+.startMenuItem {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 11px;
+  color: #000;
+  gap: 8px;
+}
+
+.startMenuItem:hover {
+  background: #000080;
+  color: #ffffff;
+}
+
+.menuIcon {
+  font-size: 16px;
+  width: 16px;
+  text-align: center;
+}
+
+.startMenuSeparator {
+  height: 1px;
+  background: #808080;
+  margin: 2px 0;
+}
+
+/* Shutdown Screen */
+.shutdownScreen {
+  width: 100vw;
+  height: 100vh;
+  background: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+
+.shutdownMessage {
+  text-align: center;
+  color: #ffffff;
+  font-family: "Tahoma", "Arial", sans-serif;
+}
+
+.shutdownIcon {
+  font-size: 64px;
+  margin-bottom: 20px;
+}
+
+.shutdownText {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.shutdownSubtext {
+  font-size: 14px;
+  color: #cccccc;
+  font-style: italic;
+}
+
 /* Dialog Overlay */
 .dialogOverlay {
   position: fixed;
@@ -424,6 +512,36 @@
   .notepadText {
     font-size: 15px;
   }
+
+  .startMenu {
+    bottom: 40px;
+    left: 8px;
+    min-width: 180px;
+  }
+
+  .startMenuItem {
+    padding: 6px 8px;
+    font-size: 12px;
+  }
+
+  .menuIcon {
+    font-size: 18px;
+    width: 18px;
+  }
+
+  .shutdownIcon {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+
+  .shutdownText {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  .shutdownSubtext {
+    font-size: 12px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -470,5 +588,35 @@
 
   .notepadText {
     font-size: 14px;
+  }
+
+  .startMenu {
+    bottom: 40px;
+    left: 8px;
+    min-width: 160px;
+  }
+
+  .startMenuItem {
+    padding: 5px 8px;
+    font-size: 11px;
+  }
+
+  .menuIcon {
+    font-size: 16px;
+    width: 16px;
+  }
+
+  .shutdownIcon {
+    font-size: 40px;
+    margin-bottom: 12px;
+  }
+
+  .shutdownText {
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+
+  .shutdownSubtext {
+    font-size: 11px;
   }
 }

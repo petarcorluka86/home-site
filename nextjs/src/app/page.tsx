@@ -56,6 +56,7 @@ export default function Home() {
     "⌛ Setup Node.js (express) with Docker",
     "⌛ Setup Postgres with Docker",
     "⌛ Use Docker Compose to run all services",
+    "⌛ Cancel ongoing same task if another task of same type should start",
   ];
 
   if (isShutdown) {

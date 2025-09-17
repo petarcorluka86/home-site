@@ -1,0 +1,138 @@
+.dialogOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 20px;
+}
+
+.dialog {
+  background: #c0c0c0;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-bottom: 2px solid #808080;
+  border-right: 2px solid #808080;
+  border-radius: 0;
+  min-width: 300px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: none;
+  font-family: "Tahoma", "Arial", sans-serif;
+}
+
+.dialogTitleBar {
+  background: #000080;
+  color: #ffffff;
+  padding: 3px 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0;
+  font-weight: bold;
+}
+
+.dialogTitle {
+  font-size: 11px;
+}
+
+.closeButton {
+  background: #c0c0c0;
+  border: 2px outset #ffffff;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+  line-height: 1;
+}
+
+.closeButton:hover {
+  filter: brightness(1.03);
+}
+
+.closeButton:active {
+  border: 2px inset #ffffff;
+}
+
+.dialogContent {
+  padding: 10px 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.dialogIcon {
+  font-size: 32px;
+  flex-shrink: 0;
+}
+
+.dialogText {
+  flex: 1;
+}
+
+.dialogText h3 {
+  margin: 0 0 8px 0;
+  font-size: 12px;
+  font-weight: bold;
+  color: #000;
+}
+
+.dialogText p {
+  margin: 0 0 8px 0;
+  font-size: 11px;
+  line-height: 1.4;
+  color: #000;
+}
+
+.dialogButtons {
+  padding: 8px 16px 16px 16px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.okButton {
+  background: #c0c0c0;
+  border: 2px outset #ffffff;
+  padding: 4px 14px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: bold;
+  color: #000;
+  border-radius: 0;
+  min-width: 60px;
+}
+
+.okButton:hover {
+  filter: brightness(1.03);
+}
+
+.okButton:active {
+  border: 2px inset #ffffff;
+}
+
+@media (max-width: 768px) {
+  .dialog {
+    min-width: 280px;
+    max-width: 90vw;
+    margin: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dialog {
+    min-width: 260px;
+    margin: 10px;
+  }
+}

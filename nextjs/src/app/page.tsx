@@ -1,8 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./page.module.css";
 import Image from "next/image";
+import Dialog from "@/components/Dialog/Dialog";
+import StartMenu from "@/components/StartMenu/StartMenu";
+import DesktopIcon from "@/components/DesktopIcon/DesktopIcon";
+import Notepad from "@/components/Notepad/Notepad";
 
 export default function Home() {
   const [showWelcomeDialog, setShowWelcomeDialog] = useState(false);
@@ -11,6 +15,8 @@ export default function Home() {
   const [isShutdown, setIsShutdown] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [time, setTime] = useState<string>("");
+  const startMenuRef = useRef<HTMLDivElement | null>(null);
+  const startButtonRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -21,27 +27,22 @@ export default function Home() {
     return () => clearInterval(id);
   }, []);
 
-  // Close Start menu when clicking outside
+  // Close Start menu when clicking outside (using refs)
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (showStartMenu) {
-        const target = event.target as Element;
-        if (
-          !target.closest(`.${styles.startMenu}`) &&
-          !target.closest(`.${styles.startButton}`)
-        ) {
-          setShowStartMenu(false);
-        }
+      if (!showStartMenu) return;
+      const target = event.target as Node;
+      const menuEl = startMenuRef.current;
+      const buttonEl = startButtonRef.current;
+      const clickedOutsideMenu = menuEl ? !menuEl.contains(target) : true;
+      const clickedOutsideButton = buttonEl ? !buttonEl.contains(target) : true;
+      if (clickedOutsideMenu && clickedOutsideButton) {
+        setShowStartMenu(false);
       }
     };
 
-    if (showStartMenu) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [showStartMenu]);
 
   const tasks = [
@@ -80,6 +81,7 @@ export default function Home() {
         <div
           className={styles.startButton}
           onClick={() => setShowStartMenu(!showStartMenu)}
+          ref={startButtonRef}
         >
           <span>START</span>
         </div>
@@ -88,130 +90,60 @@ export default function Home() {
 
       {/* Windows 95 Start Menu */}
       {showStartMenu && (
-        <div className={styles.startMenu}>
-          <div className={styles.startMenuHeader}>
-            <span>Windows 95</span>
-          </div>
-          <div
-            className={styles.startMenuItem}
-            onClick={() => {
+        <div ref={startMenuRef}>
+          <StartMenu
+            onOpenTasks={() => {
               setShowTasksDialog(true);
               setShowStartMenu(false);
             }}
-          >
-            <Image src="/notepad.png" alt="Tasks" width={16} height={16} />
-            <span>Tasks.txt</span>
-          </div>
-          <div
-            className={styles.startMenuItem}
-            onClick={() => {
+            onOpenHelp={() => {
               setShowWelcomeDialog(true);
               setShowStartMenu(false);
             }}
-          >
-            <Image src="/help.png" alt="Help" width={16} height={16} />
-            <span>Help</span>
-          </div>
-          <div className={styles.startMenuSeparator}></div>
-          <div
-            className={styles.startMenuItem}
-            onClick={() => {
+            onShutdown={() => {
               setShowStartMenu(false);
               setIsShutdown(true);
             }}
-          >
-            <Image src="/shutdown.png" alt="Shutdown" width={16} height={16} />
-            <span>Shut Down</span>
-          </div>
+          />
         </div>
       )}
 
       {/* Desktop Icons */}
       <div className={styles.desktopIcons}>
-        <div
-          className={styles.desktopIcon}
-          onClick={() => setShowTasksDialog(true)}
-        >
+        <DesktopIcon label="Tasks.txt" onOpen={() => setShowTasksDialog(true)}>
           <Image src="/notepad.png" alt="Tasks" width={32} height={32} />
-          <span>Tasks.txt</span>
-        </div>
-        <div
-          className={styles.desktopIcon}
-          onClick={() => setShowWelcomeDialog(true)}
-        >
+        </DesktopIcon>
+        <DesktopIcon label="Help" onOpen={() => setShowWelcomeDialog(true)}>
           <Image src="/help.png" alt="Help" width={32} height={32} />
-          <span>Help</span>
-        </div>
+        </DesktopIcon>
       </div>
 
       {/* Welcome Dialog */}
       {showWelcomeDialog && (
-        <div className={styles.dialogOverlay}>
-          <div className={styles.dialog}>
-            <div className={styles.dialogTitleBar}>
-              <span className={styles.dialogTitle}>Welcome</span>
-              <button
-                className={styles.closeButton}
-                onClick={() => setShowWelcomeDialog(false)}
-              >
-                ×
-              </button>
-            </div>
-            <div className={styles.dialogContent}>
-              <div className={styles.dialogIcon}>ℹ️</div>
-              <div className={styles.dialogText}>
-                <h3>Hi there!</h3>
-                <p>
-                  This is a DevOps playground used for educational purposes.
-                </p>
-                <p>There is no real use of this site.</p>
-              </div>
-            </div>
-            <div className={styles.dialogButtons}>
-              <button
-                className={styles.okButton}
-                onClick={() => setShowWelcomeDialog(false)}
-              >
-                OK
-              </button>
-            </div>
-          </div>
-        </div>
+        <Dialog
+          title="Welcome"
+          onClose={() => setShowWelcomeDialog(false)}
+          icon={"ℹ️"}
+        >
+          <h3>Hi there!</h3>
+          <p>This is a DevOps playground used for educational purposes.</p>
+          <p>There is no real use of this site.</p>
+        </Dialog>
       )}
 
       {/* Tasks Dialog - Windows 95 Notepad Style */}
       {showTasksDialog && (
-        <div className={styles.dialogOverlay}>
-          <div className={styles.notepadWindow}>
-            <div className={styles.notepadTitleBar}>
-              <span className={styles.notepadTitle}>Tasks.txt - Notepad</span>
-              <button
-                className={styles.closeButton}
-                onClick={() => setShowTasksDialog(false)}
-              >
-                ×
-              </button>
-            </div>
-            <div className={styles.notepadMenuBar}>
-              <span className={styles.menuItem}>File</span>
-              <span className={styles.menuItem}>Edit</span>
-              <span className={styles.menuItem}>Search</span>
-              <span className={styles.menuItem}>Help</span>
-            </div>
-            <div className={styles.notepadContent}>
-              <div className={styles.notepadText}>
-                DevOps Tasks Completed:
-                <br />
-                <br />
-                {tasks.map((task, index) => (
-                  <div key={index} className={styles.notepadTask}>
-                    • {task}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+        <Notepad
+          title="Tasks.txt - Notepad"
+          onClose={() => setShowTasksDialog(false)}
+        >
+          DevOps Tasks Completed:
+          <br />
+          <br />
+          {tasks.map((task, index) => (
+            <div key={index}>• {task}</div>
+          ))}
+        </Notepad>
       )}
     </div>
   );

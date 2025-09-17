@@ -53,6 +53,9 @@ export default function Home() {
     "✅ Setup Next.js app with Docker",
     "✅ Setup nginx reverse proxy",
     "✅ Setup auto deploy with GitHub actions",
+    "⌛ Setup Node.js (express) with Docker",
+    "⌛ Setup Postgres with Docker",
+    "⌛ Use Docker Compose to run all services",
   ];
 
   if (isShutdown) {

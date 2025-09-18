@@ -9,6 +9,7 @@ import DesktopIcon from "@/components/DesktopIcon/DesktopIcon";
 import Notepad from "@/components/Notepad/Notepad";
 import Toolbar from "@/components/Toolbar/Toolbar";
 import Shutdown from "@/components/Shutdown/Shutdown";
+import useTasks from "@/hooks/useTasks";
 
 export default function Home() {
   const [showWelcomeDialog, setShowWelcomeDialog] = useState(false);
@@ -46,18 +47,11 @@ export default function Home() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [showStartMenu]);
 
-  const tasks = [
-    "✅ Buy server on Hetzner",
-    "✅ Setup domain (Namecheap)",
-    "✅ Setup SSL",
-    "✅ Setup Next.js app with Docker",
-    "✅ Setup nginx reverse proxy",
-    "✅ Setup auto deploy with GitHub actions",
-    "⌛ Setup Node.js (express) with Docker",
-    "⌛ Setup Postgres with Docker",
-    "⌛ Use Docker Compose to run all services",
-    "⌛ Cancel ongoing same task if another task of same type should start",
-  ];
+  const {
+    labels: tasks,
+    loading: tasksLoading,
+    error: tasksError,
+  } = useTasks();
 
   if (isShutdown) {
     return <Shutdown onPowerOn={() => setIsShutdown(false)} />;
@@ -116,12 +110,16 @@ export default function Home() {
           title="Tasks.txt - Notepad"
           onClose={() => setShowTasksDialog(false)}
         >
-          DevOps Tasks Completed:
+          DevOps Tasks:
           <br />
           <br />
-          {tasks.map((task, index) => (
-            <div key={index}>• {task}</div>
-          ))}
+          {tasksLoading && <div>Loading tasks...</div>}
+          {tasksError && (
+            <div style={{ color: "red" }}>Error: {tasksError}</div>
+          )}
+          {!tasksLoading &&
+            !tasksError &&
+            tasks.map((task, index) => <div key={index}>• {task}</div>)}
         </Notepad>
       )}
     </div>

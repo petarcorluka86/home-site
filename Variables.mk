@@ -1,0 +1,30 @@
+ -include .env
+ 
+PROJECT_NAME ?= home-site
+NETWORK ?= home-site-network
+
+NEXT_IMAGE ?= nextjs-image
+NEXT_CONTAINER ?= nextjs-container
+NEXT_DIR ?= ./nextjs
+NEXT_PORT ?= 3000
+NEXT_CONTAINER_PORT ?= 3000
+
+NODE_IMAGE ?= nodejs-image
+NODE_CONTAINER ?= nodejs-container
+NODE_DIR ?= ./nodejs
+NODE_PORT ?= $(PORT)
+NODE_PORT ?= 8000
+NODE_CONTAINER_PORT ?= 8000
+NODE_HOST ?= $(HOSTNAME)
+NODE_HOST ?= 0.0.0.0
+
+POSTGRES_IMAGE ?= postgres-image
+POSTGRES_CONTAINER ?= postgres-container
+POSTGRES_DIR ?= ./postgres
+POSTGRES_PORT ?= 5432
+POSTGRES_CONTAINER_PORT ?= 5432
+POSTGRES_HOST ?= $(POSTGRES_CONTAINER)
+POSTGRES_USER ?= root
+POSTGRES_DB ?= db
+POSTGRES_HOST_AUTH_METHOD ?= trust
+POSTGRES_PASSWORD ?=

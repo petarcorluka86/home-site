@@ -1,7 +1,7 @@
  -include .env
  
-PROJECT_NAME ?= home-site
-NETWORK ?= home-site-network
+PROJECT_NAME ?= windows-95
+NETWORK ?= windows-95-network
 
 NEXT_IMAGE ?= nextjs-image
 NEXT_CONTAINER ?= nextjs-container

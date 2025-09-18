@@ -3,9 +3,7 @@ include Postgres.mk
 include Nodejs.mk
 include Nextjs.mk
 
-
 .PHONY: network all-build all-start all-stop all-restart all-remove
-
 
 network:
 	@if ! docker network inspect $(NETWORK) >/dev/null 2>&1; then \

@@ -12,10 +12,8 @@ NEXT_CONTAINER_PORT ?= 3000
 NODE_IMAGE ?= nodejs-image
 NODE_CONTAINER ?= nodejs-container
 NODE_DIR ?= ./nodejs
-NODE_PORT ?= $(PORT)
 NODE_PORT ?= 8000
 NODE_CONTAINER_PORT ?= 8000
-NODE_HOST ?= $(HOSTNAME)
 NODE_HOST ?= 0.0.0.0
 
 POSTGRES_IMAGE ?= postgres-image

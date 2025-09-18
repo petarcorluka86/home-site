@@ -1,7 +1,7 @@
-include Variables.mk
-include Postgres.mk
-include Nodejs.mk
-include Nextjs.mk
+include variables.mk
+include postgres.mk
+include nodejs.mk
+include nextjs.mk
 
 .PHONY: network all-build all-start all-stop all-restart all-remove
 

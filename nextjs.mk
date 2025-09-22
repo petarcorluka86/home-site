@@ -19,7 +19,7 @@ next-run: next-silent-cleanup
 	-p $(NEXT_PORT):$(NEXT_CONTAINER_PORT) \
 	$(NEXT_IMAGE)
 
-next-run-dev: next-silent-cleanup
+next-run-dev: next-build-dev network next-silent-cleanup
 	docker run --rm -it \
 	--name $(NEXT_CONTAINER) \
 	--network $(NETWORK) \
@@ -29,10 +29,7 @@ next-run-dev: next-silent-cleanup
 
 next-start: next-build network next-run
 	@echo "Started Next.js server"
-
-next-start-dev: next-build-dev next-run-dev
-	@echo "Started Next.js server in development mode"
-
+	
 next-stop:
 	-@docker stop $(NEXT_CONTAINER) || true
 

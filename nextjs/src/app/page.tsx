@@ -95,13 +95,20 @@ export default function Home() {
 
       {showWelcomeDialog && (
         <Dialog
-          title="Welcome"
+          title="Help"
           onClose={() => setShowWelcomeDialog(false)}
           icon={"ℹ️"}
         >
           <h3>Hi there!</h3>
           <p>This is a DevOps playground used for educational purposes.</p>
-          <p>There is no real use of this site.</p>
+          <p>Here is the architecture schema:</p>
+          <Image
+            src="/schema.png"
+            alt="Architecture schema"
+            width={800}
+            height={600}
+            style={{ width: "100%", height: "auto" }}
+          />
         </Dialog>
       )}
 
